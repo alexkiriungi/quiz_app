@@ -72,6 +72,7 @@ const quizData = [
     }
 ];
 
+const quiz = document.getElementById('quiz');
 const questionEl = document.getElementById('question');
 const a_text = document.getElementById('a_text');
 const b_text = document.getElementById('b_text');
@@ -128,8 +129,17 @@ submitBtn.addEventListener('click', () => {
        if(currentQuiz < quizData.length) {
         loadQuiz();
         } else {
-            alert("You Have Finished!");
-    }
-
+            quiz.innerHTML = `<h2>You correctly answered
+            ${score} /${quizData.length} questions.</h2>`;
+            const div = document.createElement('div');
+            if (score > quizData.length / 2) {
+                div.innerHTML = `<h2>Yaaay We are Good Friends!</h2> <button onclick="location.reload()">Reload</button>`;
+                div.style.color = "blue";
+            } else {
+                div.innerHTML = `<h2>Boooo! You suck!</h2> <button onclick="location.reload()">Reload</button>`;
+                div.style.color = "red";
+            };
+            quiz.appendChild(div);
+            }
     }
 });
